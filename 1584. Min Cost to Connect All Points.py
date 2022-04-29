@@ -66,20 +66,15 @@ class Solution:
         result = 0
         while len(visited) < len(points):
             cost, p1, p2 = heappop(heap)
-            if p2 not in visited:
+            p = p2 if p2 not in visited else p1
+            if p not in visited:
                 result += cost
-                visited.add(p2)
+                visited.add(p)
                 for next_p in range(0, len(points)):
                     if next_p not in visited:
-                        heappush(heap, (abs(points[p2][0] - points[next_p][0]) + abs(points[p2][1] - points[next_p][1])
-                                        , p2, next_p))
-            if p1 not in visited:
-                result += cost
-                visited.add(p1)
-                for next_p in range(0, len(points)):
-                    if next_p not in visited:
-                        heappush(heap, (abs(points[p1][0] - points[next_p][0]) + abs(points[p1][1] - points[next_p][1])
-                                        , p1, next_p))
+                        heappush(heap, (abs(points[p][0] - points[next_p][0]) +
+                                        abs(points[p][1] - points[next_p][1]),
+                                        p, next_p))
         return result
 
 
