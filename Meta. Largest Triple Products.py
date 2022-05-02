@@ -5,16 +5,6 @@ from heapq import *
 
 class Solution:
     def findMaxProduct(self, arr):
-        # result = []
-        # heap = []
-        # heapify(heap)
-        # for a in arr:
-        #     heappush(heap, a)
-        #     if len(heap) < 3:
-        #         result.append(-1)
-        #     else:
-        #         result.append(reduce(lambda x, y: x*y, nlargest(3, heap)))
-        # return result
 
         result = []
         heap = []
