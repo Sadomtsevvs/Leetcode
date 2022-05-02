@@ -1,11 +1,40 @@
-import bisect
-from collections import defaultdict
+from unittest.mock import Mock, MagicMock
+from collections import Counter
 
-a = [1,2,3,4,5,6,6,6,6,7,7,7,8,9]
+mocked_form = Mock()
+mocked_form.validate.return_value = True
+mocked_form.name.data = 'test name'
+mocked_form.address.data = 'test address'
 
-print('bisect left:', bisect.bisect_left(a, 6))
-print('bisect:', bisect.bisect(a, 6))
-print('bisect right:', bisect.bisect_right(a, 6))
+print(mocked_form.validate())
+print(mocked_form.name.data)
+print(mocked_form.address.data)
+print(type(mocked_form.address.data))
 
-d = dict()
-print(type(d))
+class TestName:
+    data = 'test name'
+
+class TestAddress:
+    data = 'test address'
+
+class MockedOrderForm:
+
+    name = TestName()
+    address = TestAddress()
+
+    def validate(self):
+        return True
+
+mocked_form = MockedOrderForm()
+print(mocked_form.validate())
+print(mocked_form.name.data)
+print(mocked_form.address.data)
+print(type(mocked_form.address.data))
+
+cntr = Counter('ffe')
+print(bool(cntr))
+cntr['f'] -= 2
+del cntr['f']
+cntr['e'] -= 1
+del cntr['e']
+print(bool(cntr))
