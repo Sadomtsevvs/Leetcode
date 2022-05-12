@@ -21,7 +21,7 @@ class Solution:
 start_time = time()
 
 _revenues = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-_milestones = [5, 100, 200, 500, 551]
+_milestones = [5, 100, 200, 500, 550]
 # _revenues = [700, 800, 600, 400, 600, 700]
 # _milestones = [3100, 2200, 800, 2100, 1000]
 # _revenues = [100, 200, 300, 400, 500]
