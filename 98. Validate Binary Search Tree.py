@@ -12,12 +12,6 @@ class Solution:
             return True
         if not (maxval > root.val > minval):
             return False
-        if not root.right and not root.left:
-            return True
-        if not root.left and root.right is not None:
-            return self.isValidBST(root.right, maxval, root.val)
-        elif not root.right and root.left is not None:
-            return self.isValidBST(root.left, root.val, minval)
         return self.isValidBST(root.right, maxval, root.val) and self.isValidBST(root.left, root.val, minval)
 
         # official stack solution

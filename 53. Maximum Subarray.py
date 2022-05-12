@@ -4,23 +4,30 @@ from time import time
 class Solution:
     def maxSubArray(self, nums: list[int]) -> int:
 
-        # my first solution, i don't like it, but it works
+        cursum = -float('inf')
+        globalsum = -float('inf')
+        for num in nums:
+            cursum = max(cursum + num, num)
+            globalsum = max(globalsum, cursum)
+        return globalsum
 
-        result = cur_sum = nums[0]
-        first = 0
-        for last in range(1, len(nums)):
-            if cur_sum <= 0 and nums[last] > 0:
-                first = last
-                cur_sum = nums[last]
-            elif nums[first] < 0 and nums[last] > nums[first]:
-                while nums[last] > nums[first]:
-                    cur_sum -= nums[first]
-                    first += 1
-                cur_sum += nums[last]
-            else:
-                cur_sum += nums[last]
-            result = max(result, cur_sum)
-        return result
+        # # my first solution, i don't like it, but it works
+        #
+        # result = cur_sum = nums[0]
+        # first = 0
+        # for last in range(1, len(nums)):
+        #     if cur_sum <= 0 and nums[last] > 0:
+        #         first = last
+        #         cur_sum = nums[last]
+        #     elif nums[first] < 0 and nums[last] > nums[first]:
+        #         while nums[last] > nums[first]:
+        #             cur_sum -= nums[first]
+        #             first += 1
+        #         cur_sum += nums[last]
+        #     else:
+        #         cur_sum += nums[last]
+        #     result = max(result, cur_sum)
+        # return result
 
         # solution from LC comments 1
         #
@@ -50,6 +57,8 @@ start_time = time()
 
 # _nums = [-2,-3,1]
 # _nums = [5,4,-1,7,8]
+# _nums = [1,2]
+# _nums = [-1,-2]
 _nums = [-2,1,-3,4,-1,2,1,-5,4]
 # Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
 # Output: 6
