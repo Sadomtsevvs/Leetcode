@@ -31,13 +31,41 @@ class Solution:
                 right -= 1
         return min(result, carpetLen)
 
+        # solution from LC comments
+        #
+        # # sort the tiles by the starting position
+        # tiles.sort(key=lambda x: x[0])
+        # # build the starting position array
+        # startPos = [tiles[i][0] for i in range(len(tiles))]
+        # # build the prefix sum array
+        # preSum = [0] * (len(tiles) + 1)
+        # for i in range(1, len(tiles) + 1):
+        #     preSum[i] = preSum[i - 1] + (tiles[i - 1][1] - tiles[i - 1][0] + 1)
+        #
+        # res = 0
+        # for i in range(len(tiles)):
+        #     s, e = tiles[i]
+        #     # if the length of tile >= length of carpet, return carpetLen
+        #     if e >= s + carpetLen - 1:
+        #         return carpetLen
+        #     # binary search the index of the ending tile that the carpet can partially cover
+        #     endIdx = bisect_right(startPos, s + carpetLen - 1) - 1
+        #     # calculate the length of the ending tile that the carpet cannot cover
+        #     compensate = 0
+        #     if tiles[endIdx][1] > s + carpetLen - 1:
+        #         compensate = tiles[endIdx][1] - s - carpetLen + 1
+        #     # update the result
+        #     res = max(res, preSum[endIdx + 1] - preSum[i] - compensate)
+        #
+        # return res
+
 
 start_time = time()
 
-# _tiles = [[1, 5], [10, 11], [12, 18], [20, 25], [30, 32]]
-# _carpetLen = 10
-_tiles = [[10,12],[1,1]]
-_carpetLen = 2
+_tiles = [[1, 5], [10, 11], [12, 18], [20, 25], [30, 32]]
+_carpetLen = 10
+# _tiles = [[10,12],[1,1]]
+# _carpetLen = 2
 # _tiles = [[7917,7925], [7930,7950], [7969,7987], [7994,7995], [8003,8011], [8013,8020], [8027,8035], [8051,8057],[8074,8089], [8096,8104], [8123,8139]]
 # _carpetLen = 9854
 # Input: tiles = [[1,5],[10,11],[12,18],[20,25],[30,32]], carpetLen = 10
