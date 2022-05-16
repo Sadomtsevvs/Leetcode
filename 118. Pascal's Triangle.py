@@ -14,6 +14,24 @@ class Solution:
             result.append(next_row)
         return result
 
+        # another version
+        #
+        # result = [[1]]
+        # for i in range(1, numRows):
+        #     layer = [1]
+        #     for j in range(1, i):
+        #         layer.append(result[i-1][j-1] + result[i-1][j])
+        #     layer.append(1)
+        #     result.append(layer)
+        # return result
+
+        # from LC
+        #
+        # res = [[1]]
+        # for i in range(1, numRows):
+        #     res += [map(lambda x, y: x+y, res[-1] + [0], [0] + res[-1])]
+        # return res[:numRows]
+
 
 start_time = time()
 
