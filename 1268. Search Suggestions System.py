@@ -12,11 +12,9 @@ class Solution:
             cur_result = []
             prefix += char
             pos = bisect_left(products, prefix)
-            for i in range(3):
-                if pos + i >= len(products):
-                    break
-                if products[pos+i].startswith(prefix):
-                    cur_result.append(products[pos+i])
+            for i in range(pos, min(pos + 3, len(products))):
+                if products[i].startswith(prefix):
+                    cur_result.append(products[i])
             result.append(cur_result)
         return result
 
