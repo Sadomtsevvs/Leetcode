@@ -4,13 +4,13 @@ from typing import List
 
 class Solution:
     def maxProduct(self, words: List[str]) -> int:
-        # ans = 0
-        # set_words = [set(word) for word in words]
-        # for i in range(len(words) - 1):
-        #     for j in range(i+1, len(words)):
-        #         if not set_words[i] & set_words[j]:
-        #             ans = max(ans, len(words[i]) * len(words[j]))
-        # return ans
+        ans = 0
+        set_words = [set(word) for word in words]
+        for i in range(len(words) - 1):
+            for j in range(i+1, len(words)):
+                if not set_words[i] & set_words[j]:
+                    ans = max(ans, len(words[i]) * len(words[j]))
+        return ans
 
         # from LC
         #
