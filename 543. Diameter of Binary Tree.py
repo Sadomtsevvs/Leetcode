@@ -26,6 +26,21 @@ class Solution:
 
         return ans[0]
 
+        # my second solution from scratch
+        #
+        # ans = [0]
+        #
+        # def longest_child_node(node):
+        #     if not node:
+        #         return 0
+        #     left = longest_child_node(node.left)
+        #     right = longest_child_node(node.right)
+        #     ans[0] = max(ans[0], left + right)
+        #     return 1 + max(left, right)
+        #
+        # longest_child_node(root)
+        # return ans[0]
+
         # from LC comments
         #
         # self.ans = 0
