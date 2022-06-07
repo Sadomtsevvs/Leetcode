@@ -4,7 +4,31 @@ from time import time
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
 
-        # my solution, it works, but slow
+        result = set()
+        nums.sort()
+        prev = None
+
+        for i in range(len(nums) - 2):
+            if nums[i] > 0:
+                break
+            if nums[i] == prev:
+                continue
+            prev = nums[i]
+            target = 0 - nums[i]
+            left, right = i + 1, len(nums) - 1
+            while left < right and nums[right] >= 0:
+                s = nums[left] + nums[right]
+                if s == target:
+                    result.add((nums[i], nums[left], nums[right]))
+                    left += 1
+                elif s < target:
+                    left += 1
+                else:
+                    right -= 1
+        return list(map(list, result))
+
+
+        # my first solution, it works, but slow
         #
         # result = []
         # result_sets = set()
@@ -30,28 +54,28 @@ class Solution:
 
         # Solution from LC comments
         #
-        res = []
-        nums.sort()
-        for i in range(len(nums)-2):
-            if i > 0 and nums[i] == nums[i-1]:
-                continue
-            if nums[i] > 0:
-                break
-            l, r = i+1, len(nums)-1
-            while l < r:
-                s = nums[i] + nums[l] + nums[r]
-                if s < 0:
-                    l +=1
-                elif s > 0:
-                    r -= 1
-                else:
-                    res.append((nums[i], nums[l], nums[r]))
-                    while l < r and nums[l] == nums[l+1]:
-                        l += 1
-                    while l < r and nums[r] == nums[r-1]:
-                        r -= 1
-                    l += 1; r -= 1
-        return res
+        # res = []
+        # nums.sort()
+        # for i in range(len(nums)-2):
+        #     if i > 0 and nums[i] == nums[i-1]:
+        #         continue
+        #     if nums[i] > 0:
+        #         break
+        #     l, r = i+1, len(nums)-1
+        #     while l < r:
+        #         s = nums[i] + nums[l] + nums[r]
+        #         if s < 0:
+        #             l +=1
+        #         elif s > 0:
+        #             r -= 1
+        #         else:
+        #             res.append((nums[i], nums[l], nums[r]))
+        #             while l < r and nums[l] == nums[l+1]:
+        #                 l += 1
+        #             while l < r and nums[r] == nums[r-1]:
+        #                 r -= 1
+        #             l += 1; r -= 1
+        # return res
 
     # Solution from LC comments
     #
@@ -102,6 +126,7 @@ start_time = time()
 
 _nums = [3, 0, -2, -1, 1, 2]
 #_nums = [0, 0, 0, 0]
+_nums = [-1,0,1,2,-1,-4]
 # Input: nums = [-1,0,1,2,-1,-4]
 # Output: [[-1,-1,2],[-1,0,1]]
 
