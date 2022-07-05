@@ -5,14 +5,15 @@ import heapq
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
+        # O(nlog(n))
         if not nums:
             return 0
         ans = 1
         cur_consecutive = 1
-        heapq.heapify(nums)
+        heapq.heapify(nums)  # O(n)
         prev = heapq.heappop(nums)
-        while nums:
-            cur = heapq.heappop(nums)
+        while nums:  # O(n)
+            cur = heapq.heappop(nums)  # O(log(n))
             diff = cur - prev
             if diff == 1:
                 cur_consecutive += 1
@@ -21,6 +22,24 @@ class Solution:
                 cur_consecutive = 1
             prev = cur
         return ans
+
+        # official solution, O(n)
+        #
+        # longest_streak = 0
+        # num_set = set(nums)
+        #
+        # for num in num_set:
+        #     if num - 1 not in num_set:
+        #         current_num = num
+        #         current_streak = 1
+        #
+        #         while current_num + 1 in num_set:
+        #             current_num += 1
+        #             current_streak += 1
+        #
+        #         longest_streak = max(longest_streak, current_streak)
+        #
+        # return longest_streak
 
 
 start_time = time()
