@@ -6,6 +6,20 @@ import heapq
 class Solution:
     def minDeletions(self, s: str) -> int:
 
+        ans = 0
+        heap = []
+        for cnt in Counter(s).values():
+            heapq.heappush(heap, -cnt)
+        while heap:
+            cnt = heapq.heappop(heap)
+            if heap and heap[0] == cnt:
+                ans += 1
+                if cnt != -1:
+                    heapq.heappush(heap, cnt + 1)
+        return ans
+
+        # my first solution
+        #
         # ans = 0
         # cntr = defaultdict(int)
         # for cnt in Counter(s).values():
