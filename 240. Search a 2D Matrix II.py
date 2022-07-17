@@ -3,17 +3,40 @@ from time import time
 
 class Solution:
     def searchMatrix(self, matrix: list[list[int]], target: int) -> bool:
-        n = len(matrix) - 1
-        m = len(matrix[0]) - 1
-        i, j = 0, m
-        while i <= n and j >= 0:
-            if matrix[i][j] == target:
-                return True
-            if matrix[i][j] < target:
-                i += 1
-            else:
-                j -= 1
-        return False
+
+        # divide and conquer approach
+        if not matrix or not matrix[0]:
+            return False
+
+        pivot_row = len(matrix) // 2
+        pivot_col = len(matrix[0]) // 2
+        pivot = matrix[pivot_row][pivot_col]
+
+        if pivot == target:
+            return True
+        elif len(matrix) == 0 and len(matrix[0]) == 0 and matrix[0][0] != target:
+            return False
+
+        if pivot > target:
+            small = [[matrix[i][j] for j in range(pivot_col)] for i in range(pivot_row, len(matrix))]
+            return self.searchMatrix(small, target) or self.searchMatrix(matrix[:pivot_row], target)
+        else:
+            small = [[matrix[i][j] for j in range(pivot_col+1, len(matrix[0]))] for i in range(pivot_row+1)]
+            return self.searchMatrix(small, target) or self.searchMatrix(matrix[pivot_row+1:], target)
+
+        # linear time approach
+        #
+        # n = len(matrix) - 1
+        # m = len(matrix[0]) - 1
+        # i, j = 0, m
+        # while i <= n and j >= 0:
+        #     if matrix[i][j] == target:
+        #         return True
+        #     if matrix[i][j] < target:
+        #         i += 1
+        #     else:
+        #         j -= 1
+        # return False
 
 
 

@@ -3,14 +3,27 @@ from time import time
 
 class Solution:
     def merge(self, intervals: list[list[int]]) -> list[list[int]]:
+
         intervals.sort()
         result = [intervals[0]]
-        for i in range(1, len(intervals)):
-            if intervals[i][0] <= result[-1][1] <= intervals[i][1]:
-                result[-1][1] = intervals[i][1]
-            elif intervals[i][0] > result[-1][1]:
-                result.append(intervals[i])
+        for beg, end in intervals:
+            if beg > result[-1][1]:
+                result.append([beg, end])
+            elif end > result[-1][1]:
+                result[-1][1] = end
         return result
+
+        # first solution
+        #
+        # intervals.sort()
+        # result = [intervals[0]]
+        # for i in range(1, len(intervals)):
+        #     if intervals[i][0] <= result[-1][1]:
+        #         if result[-1][1] <= intervals[i][1]:
+        #             result[-1][1] = intervals[i][1]
+        #     else:
+        #         result.append(intervals[i])
+        # return result
 
 
 start_time = time()
