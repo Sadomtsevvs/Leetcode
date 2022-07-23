@@ -1,4 +1,5 @@
 from time import time
+from typing import List
 
 
 class Solution:

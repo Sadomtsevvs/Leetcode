@@ -16,6 +16,19 @@ class Solution:
             result[i] = max(result[i-1], result[i-2] + dict_num[i])
         return result[max(dict_num)]
 
+        # my second solution, TLE
+        # dic = defaultdict(int)
+        # for num in nums:
+        #     dic[num] += num
+        #
+        # def dp(free):
+        #     result = 0
+        #     for key in free:
+        #         result = max(result, dic[key] + dp(free - {key, key - 1, key + 1}))
+        #     return result
+        #
+        # return dp(set(nums))
+
         # my first solution, wrong
         # Input [3, 7, 10, 5, 2, 4, 8, 9, 9, 4, 9, 2, 6, 4, 6, 5, 4, 7, 6, 10]
         # Output 65
@@ -48,8 +61,8 @@ class Solution:
 
 start_time = time()
 
-_nums = [3,7,10,5,2,4,8,9,9,4,9,2,6,4,6,5,4,7,6,10]
-# _nums = [2,2,3,3,3,4]
+# _nums = [3,7,10,5,2,4,8,9,9,4,9,2,6,4,6,5,4,7,6,10]
+_nums = [2,2,3,3,3,4]
 # Input: nums = [2,2,3,3,3,4]
 # Output: 9
 # Explanation: You can perform the following operations:
