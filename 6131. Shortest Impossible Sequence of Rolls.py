@@ -4,25 +4,42 @@ from typing import List
 
 class Solution:
     def shortestSequence(self, rolls: List[int], k: int) -> int:
-        ans = 1
-        while True:
-            dicts = dict()
-            shortest = float('inf')
-            get_nums = set()
-            for i in range(len(rolls)):
-                if rolls[i] not in dicts:
-                    get_nums.add(rolls[i])
-                    dicts[rolls[i]] = rolls[i+1:]
-                    if len(dicts[rolls[i]]) < shortest:
-                        shortest = len(dicts[rolls[i]])
-                        best = rolls[i]
-                if len(get_nums) == k:
-                    break
-            for i in range(1, k + 1):
-                if i not in get_nums:
-                    return ans
-            ans += 1
-            rolls = dicts[best]
+        # ans = 1
+        # while True:
+        #     dicts = dict()
+        #     shortest = float('inf')
+        #     get_nums = set()
+        #     for i in range(len(rolls)):
+        #         if rolls[i] not in dicts:
+        #             get_nums.add(rolls[i])
+        #             dicts[rolls[i]] = rolls[i+1:]
+        #             if len(dicts[rolls[i]]) < shortest:
+        #                 shortest = len(dicts[rolls[i]])
+        #                 best = rolls[i]
+        #         if len(get_nums) == k:
+        #             break
+        #     for i in range(1, k + 1):
+        #         if i not in get_nums:
+        #             return ans
+        #     ans += 1
+        #     rolls = dicts[best]
+
+        # from contest, amazing... O(n)
+        #
+        N = len(rolls)
+        if len(set(rolls)) < k:
+            return 1
+        if k == 1:
+            return N + 1
+
+        seen = set()
+        count = 1
+        for x in rolls:
+            seen.add(x)
+            if len(seen) == k:
+                count += 1
+                seen.clear()
+        return count
 
 
 start_time = time()
