@@ -28,7 +28,7 @@ class Solution:
         return root
 
 """
-
+"""
 # 2. more efficient solution, but still ugly
 
 def path_to_val(val, tree, path=''):
@@ -58,7 +58,7 @@ class Solution:
             else:
                 cur_ancestor = cur_ancestor.right
         return cur_ancestor
-
+"""
         # from LC comments
         #
         # If looking for me, return myself
@@ -82,3 +82,17 @@ class Solution:
         #     # somewhere below node where 'p' was found we dont need to search all the way,
         #     # because in such scenarios, node where 'p' found is LCA
         #     return left or right
+
+# 3. my third solution, like it
+
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        if not root:
+            return root
+        if root == p or root == q:
+            return root
+        left_LCA = self.lowestCommonAncestor(root.left, p, q)
+        right_LCA = self.lowestCommonAncestor(root.right, p, q)
+        if left_LCA and right_LCA:
+            return root
+        return left_LCA or right_LCA
