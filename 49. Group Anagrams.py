@@ -3,6 +3,7 @@ from time import time
 
 class Solution:
     def groupAnagrams(self, strs: list[str]) -> list[list[str]]:
+
         groups = {}
         for str in strs:
             sort_str = ''.join(sorted(str))
@@ -10,7 +11,6 @@ class Solution:
                 groups[sort_str].append(str)
             else:
                 groups[sort_str] = [str]
-        # return [value for value in groups.values()]
         return list(groups.values())
 
         # also nice solution
@@ -20,6 +20,16 @@ class Solution:
         #     key = tuple(sorted(w))
         #     d[key] = d.get(key, []) + [w]
         # return d.values()
+
+        # solution without sorting
+        #
+        # result = defaultdict(list)
+        # for word in strs:
+        #     mask = [0 for _ in range(26)]
+        #     for char in word:
+        #         mask[ord(char)-ord('a')] += 1
+        #     result[tuple(mask)].append(word)
+        # return result.values()
 
 
 start_time = time()

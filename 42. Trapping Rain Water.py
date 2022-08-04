@@ -4,6 +4,22 @@ from typing import List
 
 class Solution:
     def trap(self, height: List[int]) -> int:
+
+        # third solution
+        #
+        # result = 0
+        # water_l_r = []
+        # max_h = 0
+        # for h in height:
+        #     max_h = max(max_h, h)
+        #     water_l_r.append(max_h - h)
+        # max_h = 0
+        # for i in range(len(height)-1, -1, -1):
+        #     h = height[i]
+        #     max_h = max(max_h, h)
+        #     result += min(water_l_r[i], max_h - h)
+        # return result
+
         # second solution, after reading official
         #
         result = 0
