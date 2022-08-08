@@ -16,6 +16,17 @@ class Solution:
                 sub[i] = num
         return len(sub)
 
+        # official solution
+        #
+        # dp = []
+        # for num in nums:
+        #     pos = bisect_left(dp, num)
+        #     if pos == len(dp):
+        #         dp.append(num)
+        #     else:
+        #         dp[pos] = num
+        # return len(dp)
+
         # my solution, rather slow
         #
         # result = [1] * len(nums)
