@@ -42,3 +42,29 @@ class Solution:
             roots.add(uf.find(i))
 
         return len(roots)
+
+        # DFS, solution without UnionFind
+        #
+        # dic = defaultdict(set)
+        # for n1, n2 in edges:
+        #     dic[n1].add(n2)
+        #     dic[n2].add(n1)
+        #
+        # answer = 0
+        # to_traverse = set(range(n))
+        # while to_traverse:
+        #     answer += 1
+        #     for node in to_traverse:
+        #         break
+        #     to_traverse.remove(node)
+        #     seen = {node}
+        #     stack = [node]
+        #     while stack:
+        #         node = stack.pop()
+        #         for nxt in dic[node]:
+        #             if nxt in seen:
+        #                 continue
+        #             seen.add(nxt)
+        #             stack.append(nxt)
+        #             to_traverse.remove(nxt)
+        # return answer

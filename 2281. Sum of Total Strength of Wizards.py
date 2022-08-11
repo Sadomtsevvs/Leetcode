@@ -43,7 +43,7 @@ class Solution:
 
 start_time = time()
 
-_strength = [1, 3, 2, 4]
+_strength = [1, 3, 1, 2]
 # Example 1:
 # Input: strength = [1,3,1,2]
 # Output: 44

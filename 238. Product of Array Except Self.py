@@ -11,6 +11,22 @@ class Solution:
             right[n-i-1] = right[n-i] * nums[n-i-1]
         return [right[1]] + [left[i-1] * right[i+1] for i in range(1, n-1)] + [left[-2]]
 
+        # left_prod = [nums[0]]
+        # for i in range(1, len(nums)):
+        #     left_prod.append(left_prod[i-1] * nums[i])
+        # right_prod = [nums[-1]] * len(nums)
+        # for i in range(len(nums)-2, -1, -1):
+        #     right_prod[i] = right_prod[i+1] * nums[i]
+        # result = []
+        # for i in range(len(nums)):
+        #     if i == 0:
+        #         result.append(right_prod[1])
+        #     elif i == len(nums) - 1:
+        #         result.append(left_prod[len(nums)-2])
+        #     else:
+        #         result.append(left_prod[i-1] * right_prod[i+1])
+        # return result
+
         # amazing solution from LC comment
         # preparing left and rignt in the result answer
         #
@@ -20,7 +36,6 @@ class Solution:
         #     pre *= nums[i]
         #     ans[-1 - i] *= suf  # suffix product from other end
         #     suf *= nums[-1 - i]
-        #
         # return ans
 
 

@@ -47,7 +47,7 @@ class Solution:
 
         # solution from LC comments
         #
-        # need, missing = collections.Counter(t), len(t)
+        # need, missing = Counter(t), len(t)
         # i = I = J = 0
         # for j, c in enumerate(s, 1):
         #     missing -= need[c] > 0
