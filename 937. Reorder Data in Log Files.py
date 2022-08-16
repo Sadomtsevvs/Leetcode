@@ -8,14 +8,28 @@ class Solution:
 
         letters = []
         digits = []
-        for i in range(len(logs)):
-            words = logs[i].split(' ')
-            if words[1].isalpha():
-                letters.append(logs[i])
+        for log in logs:
+            words = log.split(' ', 1)
+            if words[1][0].isnumeric():
+                digits.append(log)
             else:
-                digits.append(logs[i])
-        letters.sort(key=lambda x: (x.split(' ', 1)[1], x.split(' ', 1)[0]))
+                letters.append(words)
+        letters.sort(key=lambda x: (x[1], x[0]))
+        letters = [' '.join(letter) for letter in letters]
         return letters + digits
+
+        # my first solution
+        #
+        # letters = []
+        # digits = []
+        # for i in range(len(logs)):
+        #     words = logs[i].split(' ')
+        #     if words[1].isalpha():
+        #         letters.append(logs[i])
+        #     else:
+        #         digits.append(logs[i])
+        # letters.sort(key=lambda x: (x.split(' ', 1)[1], x.split(' ', 1)[0]))
+        # return letters + digits
 
         # first solution, wrong, incorrect to put 1 word into the end
         # letters = []

@@ -14,3 +14,15 @@ class Solution:
         if p.val < root.val and q.val < root.val:
             return self.lowestCommonAncestor(root.left, p, q)
         return root
+
+        # my second solution, it is not work with ""binary search tree
+        #
+        # if not root:
+        #     return None
+        # if root == p or root == q:
+        #     return root
+        # lca_left = self.lowestCommonAncestor(root.left, p, q)
+        # lca_right = self.lowestCommonAncestor(root.right, p, q)
+        # if lca_left and lca_right:
+        #     return root
+        # return lca_left or lca_right
