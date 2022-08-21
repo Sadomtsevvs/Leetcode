@@ -7,6 +7,7 @@ class Solution:
         wordList = set(wordList)
         if endWord not in wordList:
             return 0
+        wordList -= {beginWord}
         ans = 1
         letters = 'abcdefjghigklmonpqrstuvwxyz'
         words = {beginWord}
@@ -23,7 +24,7 @@ class Solution:
                             wordList.remove(new_word)
             ans += 1
             words = next_words
-        return 0
+        return 0  
 
 
 start_time = time()
