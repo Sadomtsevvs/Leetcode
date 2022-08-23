@@ -22,20 +22,6 @@ class SORTracker:
             heapq.heappush(self.seen_heap, (score, list_name))
         else:
             heapq.heappush(self.queue_heap, (-score, name))
-        # if not self.seen_heap:
-        #     heapq.heappush(self.queue_heap, (-score, name))
-        #     return
-        # elif score < self.seen_heap[0][0]:
-        #     heapq.heappush(self.queue_heap, (-score, name))
-        #     return
-        # list_name = str_to_list(name)
-        # if score == self.seen_heap[0][0] and list_name < self.seen_heap[0][1]:
-        #     heapq.heappush(self.queue_heap, (-score, name))
-        #     return
-        # s, n = heapq.heappop(self.seen_heap)
-        # n = ''.join(chr(-x) for x in n if x != 0)
-        # heapq.heappush(self.queue_heap, (-s, n))
-        # heapq.heappush(self.seen_heap, (score, list_name))
 
     def get(self) -> str:
         s, n = heapq.heappop(self.queue_heap)

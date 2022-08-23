@@ -14,7 +14,6 @@ class Solution:
                         patterns.add((sites[i], sites[j], sites[k]))
             return patterns
 
-        result = defaultdict(int)
         users = defaultdict(dict)
         for i in range(len(username)):
             if username[i] in users:
@@ -29,6 +28,7 @@ class Solution:
             users[user] = user_patterns
             all_patterns.update(user_patterns)
 
+        result = defaultdict(int)
         for pattern in all_patterns:
             result[pattern] = sum(1 if pattern in v else 0 for v in users.values())
 
