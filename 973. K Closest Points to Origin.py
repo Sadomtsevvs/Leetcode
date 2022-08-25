@@ -8,6 +8,11 @@ class Solution:
         heapify(heap)
         return [heappop(heap)[1] for _ in range(k)]
 
+        # official solution
+        #
+        # points.sort(key=lambda P: P[0]**2 + P[1]**2)
+        # return points[:K]
+
 
 start_time = time()
 
