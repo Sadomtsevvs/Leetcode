@@ -6,25 +6,51 @@ from typing import List
 class Solution:
     def leadsToDestination(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
 
-        graph = defaultdict(set)
-        for f, t in edges:
-            graph[f].add(t)
+        # solution from comments
 
-        def dfs(cur, pred):
-            if cur == destination:
-                if graph[cur]:
-                    return False
+        g = defaultdict(set)
+        visited = defaultdict(int)
+        for [x, y] in edges:
+            g[x].add(y)
+
+        def dfs(node):
+            if visited[node] == 1:
                 return True
-            if not graph[cur]:
+            elif visited[node] == -1:
                 return False
-            for nxt in graph[cur]:
-                if nxt in pred:
-                    return False
-                if not dfs(nxt, pred | {cur}):
-                    return False
-            return True
+            elif len(g[node]) == 0:
+                return node == destination
+            else:
+                visited[node] = -1
+                for child in g[node]:
+                    if not dfs(child):
+                        return False
+                visited[node] = 1
+                return True
 
-        return dfs(source, set())
+        return dfs(source)
+
+        # my solution, TLE
+        #
+        # graph = defaultdict(set)
+        # for f, t in edges:
+        #     graph[f].add(t)
+        #
+        # def dfs(cur, pred):
+        #     if cur == destination:
+        #         if graph[cur]:
+        #             return False
+        #         return True
+        #     if not graph[cur]:
+        #         return False
+        #     for nxt in graph[cur]:
+        #         if nxt in pred:
+        #             return False
+        #         if not dfs(nxt, pred | {cur}):
+        #             return False
+        #     return True
+        #
+        # return dfs(source, set())
 
 start_time = time()
 
