@@ -5,6 +5,8 @@ import heapq
 def str_to_list(s):
     return [-ord(char) for char in s] + [0] * (10 - len(s))
 
+def list_to_str(lst):
+    return ''.join(chr(-x) for x in lst if x != 0)
 
 class SORTracker:
 
@@ -17,7 +19,7 @@ class SORTracker:
         if self.seen_heap and \
                 (score > self.seen_heap[0][0] or (score == self.seen_heap[0][0] and list_name > self.seen_heap[0][1])):
             s, n = heapq.heappop(self.seen_heap)
-            n = ''.join(chr(-x) for x in n if x != 0)
+            n = list_to_str(n)
             heapq.heappush(self.queue_heap, (-s, n))
             heapq.heappush(self.seen_heap, (score, list_name))
         else:
