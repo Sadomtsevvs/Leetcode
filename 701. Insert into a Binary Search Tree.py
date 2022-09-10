@@ -24,7 +24,7 @@ class Solution:
                     return root
                 stack.append(node.right)
 
-        # recursion solution from LC comments
+        # recursive solution from LC comments
         #
         # if root == None:
         #     return TreeNode(val=val)
