@@ -1,19 +1,39 @@
+from collections import defaultdict
 from time import time
 
 
 class Solution:
     def findOriginalArray(self, changed: list[int]) -> list[int]:
         # O(nlogn), not very fast
+        # changed.sort()
+        # result = []
+        # count = dict()
+        # for i in range(len(changed)-1, -1, -1):
+        #     double = changed[i]*2
+        #     if double in count and count[double] > 0:
+        #         count[double] -= 1
+        #         result.append(changed[i])
+        #     else:
+        #         count[changed[i]] = count.get(changed[i], 0) + 1
+        # if len(result) * 2 == len(changed):
+        #     return result
+        # return []
+
+        # little optimized solution
+        #
+        if len(changed) % 2 == 1:
+            return []
         changed.sort()
         result = []
-        count = dict()
+        count = defaultdict(int)
         for i in range(len(changed)-1, -1, -1):
-            double = changed[i]*2
+            num = changed[i]
+            double = num*2
             if double in count and count[double] > 0:
                 count[double] -= 1
-                result.append(changed[i])
+                result.append(num)
             else:
-                count[changed[i]] = count.get(changed[i], 0) + 1
+                count[num] += 1
         if len(result) * 2 == len(changed):
             return result
         return []
