@@ -1,11 +1,24 @@
+from functools import cache
 from time import time
 
 
 class Solution:
     def minDifficulty(self, jobDifficulty: list[int], d: int) -> int:
-        if len(jobDifficulty) < d:
-            return -1
 
+        @cache
+        def dp(i, cur_max, remain):
+            if remain == 0:
+                return float('inf')
+            if len(jobDifficulty) - i < remain:
+                return float('inf')
+            if i == len(jobDifficulty) - 1:
+                return cur_max
+            include = dp(i+1, max(cur_max, jobDifficulty[i+1]), remain)
+            not_include = cur_max + dp(i+1, jobDifficulty[i+1], remain-1)
+            return min(include, not_include)
+
+        result = dp(0, jobDifficulty[0], d)
+        return -1 if result == float('inf') else result
 
 
 start_time = time()
