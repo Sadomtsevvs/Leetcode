@@ -19,3 +19,20 @@ class Solution:
             slow = slow.next
             fast = fast.next
         return slow
+
+        # my future solution
+        #
+        # if not head or not head.next:
+        #     return None
+        # slow = head.next
+        # fast = head.next.next
+        # while slow != fast and fast and fast.next:
+        #     slow = slow.next
+        #     fast = fast.next.next
+        # if not fast or not fast.next:
+        #     return None
+        # slow = head
+        # while slow != fast:
+        #     slow = slow.next
+        #     fast = fast.next
+        # return slow
