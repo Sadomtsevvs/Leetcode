@@ -19,6 +19,22 @@ class Solution:
 
         return result
 
+        # my second solution, 28.03.2023
+        #
+        # result = []
+        #
+        # def gen(cur, opened):
+        #     if len(cur) == 2 * n:
+        #         result.append(cur)
+        #     if opened < n:
+        #         gen(cur + "(", opened + 1)
+        #     if opened > len(cur) // 2:
+        #         gen(cur + ")", opened)
+        #
+        # gen('', 0)
+        #
+        # return result
+
 
 start_time = time()
 

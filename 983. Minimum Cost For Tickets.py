@@ -17,6 +17,25 @@ class Solution:
                 dp[day] = dp[day-1]
         return dp[-1]
 
+        # my secon solution, 28.03.2023
+        #
+        # dp = [0] * 366
+        # cur_idx = 0
+        # for i in range(1, 366):
+        #     if days[cur_idx] == i:
+        #         if i < 7:
+        #             dp[i] = min(dp[i-1] + costs[0], costs[1], costs[2])
+        #         elif i < 30:
+        #             dp[i] = min(dp[i-1] + costs[0], dp[i-7] + costs[1], costs[2])
+        #         else:
+        #             dp[i] = min(dp[i-1] + costs[0], dp[i-7] + costs[1], dp[i-30] +  costs[2])
+        #         cur_idx += 1
+        #         if cur_idx > len(days) - 1:
+        #             break
+        #     else:
+        #         dp[i] = dp[i-1]
+        # return dp[i]
+
 
 start_time = time()
 
