@@ -4,18 +4,17 @@ from time import time
 class Solution:
     def mergeAlternately(self, word1: str, word2: str) -> str:
         result = ''
-        first, second = 0, 0
+        i = 0
         len1, len2 = len(word1), len(word2)
         while True:
-            if first == len1:
-                result += word2[second:]
+            if i == len1:
+                result += word2[i:]
                 break
-            if second == len2:
-                result += word1[first:]
+            if i == len2:
+                result += word1[i:]
                 break
-            result += word1[first] + word2[second]
-            first += 1
-            second += 1
+            result += word1[i] + word2[i]
+            i += 1
         return result
 
         # from LC comments
