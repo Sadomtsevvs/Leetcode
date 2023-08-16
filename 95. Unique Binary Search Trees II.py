@@ -57,6 +57,33 @@ class Solution:
 
         return f(n, list(range(1, n + 1)))
 
+        # my solution after reading official
+        #
+        # def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        #
+        #     def trees(start, end, memo):
+        #
+        #         res = []
+        #
+        #         if start > end:
+        #             return [None]
+        #         if (start, end) in memo:
+        #             return memo[(start, end)]
+        #
+        #         for i in range(start, end + 1):
+        #             lefts = trees(start, i - 1, memo)
+        #             rights = trees(i + 1, end, memo)
+        #
+        #             for left in lefts:
+        #                 for right in rights:
+        #                     res.append(TreeNode(i, left, right))
+        #
+        #         memo[(start, end)] = res
+        #
+        #         return res
+        #
+        #     return trees(1, n, {})
+
 
 #
 # Input: n = 3

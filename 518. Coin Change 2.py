@@ -3,6 +3,7 @@ from time import time
 
 class Solution:
     def change(self, amount: int, coins: list[int]) -> int:
+
         res = [0] * (amount + 1)
         res[0] = 1
         for coin in coins:
@@ -11,6 +12,24 @@ class Solution:
                     continue
                 res[i] += res[i-coin]
         return res[amount]
+
+        # my second solution, working, but no efficient
+        #
+        # @cache
+        # def dp(to_get, i):
+        #     if to_get == 0:
+        #         return 1
+        #     if to_get < 0:
+        #         return 0
+        #     if i == len(coins):
+        #         return 0
+        #     coin = coins[i]
+        #     result = 0
+        #     for j in range(to_get // coin + 1):
+        #         result += dp(to_get - coin * j, i + 1)
+        #     return result
+        #
+        # return dp(amount, 0)
 
 
 start_time = time()
