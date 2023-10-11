@@ -5,7 +5,8 @@ from typing import List
 class Solution:
     def minOperations(self, nums: List[int], x: int) -> int:
 
-        # LC hint: find the maximum subarray greedily
+        # LC hint: find the maximum subarray greedily inside the array
+        # it should be consecutive and equals sum(nums) - x
         if sum(nums) < x:
             return -1
         elif sum(nums) == x:
@@ -42,18 +43,16 @@ class Solution:
         # return -1 if result == float('inf') else result
 
 
-
-
 start_time = time()
 
 _nums = [3,2,20,1,1,3]
 _x = 10
-_nums = [1,1,4,2,3]
-_x = 5
-_nums = [5,6,7,8,9]
-_x = 4
-_nums = [1,2,3,4,5]
-_x = 15
+# _nums = [1,1,4,2,3]
+# _x = 5
+# _nums = [5,6,7,8,9]
+# _x = 4
+# _nums = [1,2,3,4,5]
+# _x = 15
 # Input: nums = [3,2,20,1,1,3], x = 10
 # Output: 5
 # Explanation: The optimal solution is to remove the last three elements and the first two elements (5 operations in total) to reduce x to zero.

@@ -1,12 +1,31 @@
+from functools import cache
 from time import time
 
 
 class Solution:
     def integerBreak(self, n: int) -> int:
-        res = [0, 1, 1]
-        for i in range(3, n + 1):
-            res.append(max([max(res[i - k], (i - k)) * k for k in range(1, i)]))
-        return res[n]
+
+        # my solution
+        #
+        @cache
+        def dp(rest):
+            if rest < 2:
+                return 1
+            result = rest
+            for i in range(2, rest):
+                result = max(result, i * dp(rest - i))
+            return result
+
+        if n <= 3:
+            return n - 1
+
+        return dp(n)
+
+        #
+        # res = [0, 1, 1]
+        # for i in range(3, n + 1):
+        #     res.append(max([max(res[i - k], (i - k)) * k for k in range(1, i)]))
+        # return res[n]
 
         # solution from LC comments
         #

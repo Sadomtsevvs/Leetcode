@@ -1,16 +1,70 @@
+class ListNode:
+
+    def __init__(self, key, value, next=None):
+        self.key = key
+        self.value = value
+        self.next = next
+
+
 class MyHashMap:
 
     def __init__(self):
-        self.d = [-1] * (10**6 + 1)
+        self.m = dict()
 
     def put(self, key: int, value: int) -> None:
-        self.d[key] = value
+        pos = key % 1000
+        if pos not in self.m:
+            self.m[pos] = ListNode(key, value)
+        else:
+            cur = self.m[pos]
+            prev = ListNode(0, 0, cur)
+            while cur:
+                if cur.key == key:
+                    cur.value = value
+                    return
+                prev, cur = cur, cur.next
+            prev.next = ListNode(key, value)
 
     def get(self, key: int) -> int:
-        return self.d[key]
+        pos = key % 1000
+        if pos in self.m:
+            cur = self.m[pos]
+            while cur:
+                if cur.key == key:
+                    return cur.value
+                cur = cur.next
+        return -1
 
     def remove(self, key: int) -> None:
-        self.d[key] = -1
+        pos = key % 1000
+        if pos not in self.m:
+            return
+        if self.m[pos].key == key:
+            self.m[pos] = self.m[pos].next
+            if self.m[pos] is None:
+                del self.m[pos]
+        else:
+            prev = self.m[pos]
+            cur = prev.next
+            while cur:
+                if cur.key == key:
+                    prev.next = cur.next
+                    return
+                prev, cur = cur, cur.next
+
+# class MyHashMap:
+#
+#     def __init__(self):
+#         self.d = [-1] * (10**6 + 1)
+#
+#     def put(self, key: int, value: int) -> None:
+#         self.d[key] = value
+#
+#     def get(self, key: int) -> int:
+#         return self.d[key]
+#
+#     def remove(self, key: int) -> None:
+#         self.d[key] = -1
 
 # solution from LC comments
 #
@@ -92,3 +146,14 @@ class MyHashMap:
 # obj.put(key,value)
 # param_2 = obj.get(key)
 # obj.remove(key)
+
+
+myHashMap = MyHashMap()
+myHashMap.put(1, 1) # The map is now [[1,1]]
+myHashMap.put(2, 2) # The map is now [[1,1], [2,2]]
+print(myHashMap.get(1))    # return 1, The map is now [[1,1], [2,2]]
+print(myHashMap.get(3))    # return -1 (i.e., not found), The map is now [[1,1], [2,2]]
+myHashMap.put(2, 1) # The map is now [[1,1], [2,1]] (i.e., update the existing value)
+print(myHashMap.get(2))    # return 1, The map is now [[1,1], [2,1]]
+myHashMap.remove(2) # remove the mapping for 2, The map is now [[1,1]]
+print(myHashMap.get(2))    # return -1 (i.e., not found), The map is now [[1,1]]

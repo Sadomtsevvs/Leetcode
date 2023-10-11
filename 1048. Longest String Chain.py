@@ -6,36 +6,64 @@ from typing import List
 class Solution:
     def longestStrChain(self, words: List[str]) -> int:
 
-        # my third solution
-        def is_predecessor(pred_word, word):
-            was_mistake = False
-            w = 0
-            p = 0
-            while w < len(word) and p < len(pred_word):
-                if word[w] != pred_word[p]:
-                    if was_mistake:
-                        return False
-                    else:
-                        was_mistake = True
-                        w += 1
+        # my forth solution
+        def is_predecessor(word1, word2):
+            i, j = 0, 0
+            skip = False
+            for j in range(len(word2)):
+                if i == len(word1):
+                    return True
+                if word1[i] == word2[j]:
+                    i += 1
+                elif not skip:
+                    skip = True
                 else:
-                    w += 1
-                    p += 1
+                    return False
             return True
 
-        lsc = dict()
-        d_w = defaultdict(list)
-        for word in set(words):
-            lsc[word] = 1
-            d_w[len(word)].append(word)
-        for l in sorted(d_w.keys()):
-            for word in d_w[l]:
-                result = 0
-                for pred_word in d_w[l - 1]:
-                    if is_predecessor(pred_word, word):
-                        result = max(result, lsc[pred_word])
-                lsc[word] += result
-        return max(lsc.values())
+        d = defaultdict(list)
+        chains = dict()
+        for word in words:
+            d[len(word)].append(word)
+            chains[word] = 1
+
+        for word1 in sorted(words, key=len):
+            for word2 in d[len(word1) + 1]:
+                if is_predecessor(word1, word2):
+                    chains[word2] = max(chains[word2], chains[word1] + 1)
+
+        return max(chains.values())
+
+        # # my third solution
+        # def is_predecessor(pred_word, word):
+        #     was_mistake = False
+        #     w = 0
+        #     p = 0
+        #     while w < len(word) and p < len(pred_word):
+        #         if word[w] != pred_word[p]:
+        #             if was_mistake:
+        #                 return False
+        #             else:
+        #                 was_mistake = True
+        #                 w += 1
+        #         else:
+        #             w += 1
+        #             p += 1
+        #     return True
+        #
+        # lsc = dict()
+        # d_w = defaultdict(list)
+        # for word in set(words):
+        #     lsc[word] = 1
+        #     d_w[len(word)].append(word)
+        # for l in sorted(d_w.keys()):
+        #     for word in d_w[l]:
+        #         result = 0
+        #         for pred_word in d_w[l - 1]:
+        #             if is_predecessor(pred_word, word):
+        #                 result = max(result, lsc[pred_word])
+        #         lsc[word] += result
+        # return max(lsc.values())
 
 
     # def is_predecessor(self, pred, string):

@@ -5,6 +5,30 @@ import bisect
 class Solution:
     def fullBloomFlowers(self, flowers: list[list[int]], persons: list[int]) -> list[int]:
 
+        # my last solution
+        #
+        begs, ends = [], []
+        for beg, end in flowers:
+            begs.append(beg)
+            ends.append(end)
+        begs.sort()
+        ends.sort()
+        see = {}
+        cur = 0
+        i, j = 0, 0
+        for p in sorted(set(persons)):
+            while i < len(begs) and begs[i] <= p:
+                cur += 1
+                i += 1
+            while j < len(ends) and ends[j] < p:
+                cur -= 1
+                j += 1
+            see[p] = cur
+        ans = []
+        for p in persons:
+            ans.append(see[p])
+        return ans
+
         # memory limit exceeded
         #
         # blooming = defaultdict(int)
@@ -24,28 +48,28 @@ class Solution:
         #     result.append(r)
         # return result
 
-        begs, ends = [], []
-        for beg, end in flowers:
-            begs.append(beg)
-            ends.append(end)
-
-        begs.sort()
-        ends.sort()
-
-        result = []
-        for person in persons:
-            fl_begs = bisect.bisect_right(begs, person)
-            fl_ends = bisect.bisect_left(ends, person)
-            result.append(fl_begs - fl_ends)
-
-            # if person < begs[0] or person > ends[-1]:
-            #     result.append(0)
-            # else:
-            #     fl_begs = bisect.bisect_right(begs, person)
-            #     fl_ends = bisect.bisect_left(ends, person)
-            #     result.append(fl_begs - fl_ends)
-
-        return result
+        # begs, ends = [], []
+        # for beg, end in flowers:
+        #     begs.append(beg)
+        #     ends.append(end)
+        #
+        # begs.sort()
+        # ends.sort()
+        #
+        # result = []
+        # for person in persons:
+        #     fl_begs = bisect.bisect_right(begs, person)
+        #     fl_ends = bisect.bisect_left(ends, person)
+        #     result.append(fl_begs - fl_ends)
+        #
+        #     # if person < begs[0] or person > ends[-1]:
+        #     #     result.append(0)
+        #     # else:
+        #     #     fl_begs = bisect.bisect_right(begs, person)
+        #     #     fl_ends = bisect.bisect_left(ends, person)
+        #     #     result.append(fl_begs - fl_ends)
+        #
+        # return result
 
         # solution from Lee
         #
@@ -55,8 +79,8 @@ class Solution:
 
 start_time = time()
 
-_flowers = [[1,6],[3,7],[9,12],[4,13]]
-_persons = [2,3,7,11]
+# _flowers = [[1,6],[3,7],[9,12],[4,13]]
+# _persons = [2,3,7,11]
 # _flowers = [[880291966,885633462],[23061436,635154137],[525989415,942828015],[288624072,508917088],
 #             [113681737,920638241],[974421257,991106719],[593907280,773214044],[179742678,710585627],
 #             [224377033,838830641],[321993685,351677532],[842596552,897894542],[930392106,958560387],
@@ -94,6 +118,18 @@ _persons = [2,3,7,11]
 # Output: [1,2,2,2]
 # Explanation: The figure above shows the times when the flowers are in full bloom and when the people arrive.
 # For each person, we return the number of flowers in full bloom during their arrival.
+
+# flowers =
+# [[19,37],[19,38],[19,35]]
+# people =
+# [6,7,21,1,13,37,5,37,46,43]
+# Use Testcase
+# Output
+# [0,0,3,0,0,3,0,3,0,0]
+# Expected
+# [0,0,3,0,0,2,0,2,0,0]
+_flowers = [[19,37],[19,38],[19,35]]
+_persons = [6,7,21,1,13,37,5,37,46,43]
 
 print(Solution().fullBloomFlowers(_flowers, _persons))
 

@@ -5,13 +5,21 @@ from time import time
 class Solution:
     def searchRange(self, nums: list[int], target: int) -> list[int]:
 
-        # my second solution
+        # my third solution
         #
-        pos_left = bisect.bisect_left(nums, target)
-        if pos_left == len(nums) or nums[pos_left] != target:
+        left = bisect.bisect_left(nums, target)
+        right = bisect.bisect_right(nums, target)
+        if right == 0 or left == len(nums) or right == left:
             return [-1, -1]
-        pos_right = bisect.bisect_right(nums, target, pos_left)
-        return [pos_left, pos_right - 1]
+        return [left, right-1]
+
+        # # my second solution
+        # #
+        # pos_left = bisect.bisect_left(nums, target)
+        # if pos_left == len(nums) or nums[pos_left] != target:
+        #     return [-1, -1]
+        # pos_right = bisect.bisect_right(nums, target, pos_left)
+        # return [pos_left, pos_right - 1]
 
         # my first solution
         #

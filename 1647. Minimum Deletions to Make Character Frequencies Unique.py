@@ -6,17 +6,30 @@ import heapq
 class Solution:
     def minDeletions(self, s: str) -> int:
 
-        ans = 0
-        heap = []
-        for cnt in Counter(s).values():
-            heapq.heappush(heap, -cnt)
-        while heap:
-            cnt = heapq.heappop(heap)
-            if heap and heap[0] == cnt:
-                ans += 1
-                if cnt != -1:
-                    heapq.heappush(heap, cnt + 1)
-        return ans
+        cntr = list(Counter(s).values())
+        cntr.sort()
+        big = cntr[-1]
+        answer = 0
+        for i in range(len(cntr)-2, -1, -1):
+            while cntr[i] > 0 and cntr[i] >= big:
+                answer += 1
+                cntr[i] -= 1
+            big = cntr[i]
+        return answer
+
+        # my second solution
+        #
+        # ans = 0
+        # heap = []
+        # for cnt in Counter(s).values():
+        #     heapq.heappush(heap, -cnt)
+        # while heap:
+        #     cnt = heapq.heappop(heap)
+        #     if heap and heap[0] == cnt:
+        #         ans += 1
+        #         if cnt != -1:
+        #             heapq.heappush(heap, cnt + 1)
+        # return ans
 
         # my first solution
         #
@@ -71,14 +84,23 @@ class Solution:
 
 start_time = time()
 
-_s = "aaabbbcc"
-_s = "aaaabbbbcccc"
-_s = "aab"
-_s = "beaddedbacdcd"
+# Example 1:
+# Input: s = "aab"
+# Output: 0
+# Explanation: s is already good.
+#
+# Example 2:
 # Input: s = "aaabbbcc"
+_s = "aaabbbcc"
 # Output: 2
 # Explanation: You can delete two 'b's resulting in the good string "aaabcc".
 # Another way it to delete one 'b' and one 'c' resulting in the good string "aaabbc".
+#
+# Example 3:
+# Input: s = "ceabaacb"
+# Output: 2
+# Explanation: You can delete both 'c's resulting in the good string "eabaab".
+# Note that we only care about characters that are still in the string at the end (i.e. frequency of 0 is ignored).
 
 print(Solution().minDeletions(_s))
 

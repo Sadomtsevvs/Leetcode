@@ -1,6 +1,6 @@
+import heapq
 from time import time
 from typing import List
-from heapq import *
 
 
 class Solution:
@@ -48,31 +48,53 @@ class Solution:
         #         if 0 <= dx < n and 0 <= dy < m and (dx, dy) not in seen:
         #             heappush(heap, (max(cur, abs(heights[i][j] - heights[dx][dy])), dx, dy))
 
+        # too complex, but working
+        #
+        # n, m = len(heights), len(heights[0])
+        # dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        #
+        # def possible_to_go_with_k(k, i, j):
+        #     if i == n - 1 and j == m - 1:
+        #         return True
+        #     seen.add((i, j))
+        #     for x, y in dirs:
+        #         dx, dy = i + x, j + y
+        #         if 0 <= dx < n and 0 <= dy < m and (dx, dy) not in seen:
+        #             effort = abs(heights[i][j] - heights[dx][dy])
+        #             if effort <= k:
+        #                 if possible_to_go_with_k(k, dx, dy):
+        #                     return True
+        #     return False
+        #
+        # beg, end = 0, max(max(heights, key=max))
+        # while beg < end:
+        #     mid = (beg + end) // 2
+        #     seen = set()
+        #     if possible_to_go_with_k(mid, 0, 0):
+        #         end = mid
+        #     else:
+        #         beg = mid + 1
+        # return beg
+
         n, m = len(heights), len(heights[0])
-        dirs = [(0, 1), (1, 0), (0, -1), (-1, 0)]
-
-        def possible_to_go_with_k(k, i, j):
-            if i == n - 1 and j == m - 1:
-                return True
-            seen.add((i, j))
-            for x, y in dirs:
-                dx, dy = i + x, j + y
-                if 0 <= dx < n and 0 <= dy < m and (dx, dy) not in seen:
-                    effort = abs(heights[i][j] - heights[dx][dy])
-                    if effort <= k:
-                        if possible_to_go_with_k(k, dx, dy):
-                            return True
-            return False
-
-        beg, end = 0, max(max(heights, key=max))
-        while beg < end:
-            mid = (beg + end) // 2
-            seen = set()
-            if possible_to_go_with_k(mid, 0, 0):
-                end = mid
-            else:
-                beg = mid + 1
-        return beg
+        visited = set()
+        i, j = 0, 0
+        ans = 0
+        heap = [(0, 0, 0)]
+        heapq.heapify(heap)
+        while heap:
+            step, i, j = heapq.heappop(heap)
+            visited.add((i, j))
+            ans = max(ans, step)
+            if i == n-1 and j == m-1:
+                return ans
+            value = heights[i][j]
+            for x, y in ((1, 0), (0, 1), (-1, 0), (0, -1)):
+                ii, jj = i + x, j + y
+                if 0 <= ii < n and 0 <= jj < m and (ii, jj) not in visited:
+                    next_value = heights[ii][jj]
+                    heapq.heappush(heap, (abs(value-next_value), ii, jj))
+        return ans
 
 
 start_time = time()

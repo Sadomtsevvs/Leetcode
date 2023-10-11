@@ -4,15 +4,24 @@ import heapq
 
 class Solution:
     def kWeakestRows(self, mat: list[list[int]], k: int) -> list[int]:
+
         heap = []
         heapq.heapify(heap)
-        for row in range(len(mat)):
-            heapq.heappush(heap, mat[row].count(1) + row / 100)
-        result = []
-        for _ in range(k):
-            el = heapq.heappop(heap)
-            result.append(round((el - int(el))*100))
-        return result
+        for i, row in enumerate(mat):
+            heapq.heappush(heap, (row.count(1), i))
+        return [heapq.heappop(heap)[1] for _ in range(k)]
+
+        # my first solution
+        #
+        # heap = []
+        # heapq.heapify(heap)
+        # for row in range(len(mat)):
+        #     heapq.heappush(heap, mat[row].count(1) + row / 100)
+        # result = []
+        # for _ in range(k):
+        #     el = heapq.heappop(heap)
+        #     result.append(round((el - int(el))*100))
+        # return result
 
         # Solution from LC comments
         #
