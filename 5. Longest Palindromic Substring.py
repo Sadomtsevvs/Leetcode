@@ -4,6 +4,40 @@ from time import time
 class Solution:
     def longestPalindrome(self, s: str) -> str:
 
+        # my third solution
+        #
+        # mx = 1
+        # ans = s[0]
+        #
+        # for i in range(len(s)):
+        #
+        #     beg, end = i, i
+        #     res = -1
+        #     while beg >= 0 and end <= len(s) - 1:
+        #         if s[beg] != s[end]:
+        #             break
+        #         res += 2
+        #         if res > mx:
+        #             mx = res
+        #             ans = s[beg: end + 1]
+        #         beg -= 1
+        #         end += 1
+        #
+        #     res = 0
+        #     if i < len(s) - 1:
+        #         beg, end = i, i + 1
+        #         while beg >= 0 and end <= len(s) - 1:
+        #             if s[beg] != s[end]:
+        #                 break
+        #             res += 2
+        #             if res > mx:
+        #                 mx = res
+        #                 ans = s[beg: end + 1]
+        #             beg -= 1
+        #             end += 1
+        #
+        # return ans
+
         # my second solution
         max_len = 1
         ans = s[0]

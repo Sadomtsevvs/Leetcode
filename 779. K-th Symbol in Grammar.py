@@ -3,11 +3,20 @@ from time import time
 
 class Solution:
     def kthGrammar(self, n: int, k: int) -> int:
+
+        # my last solution
         if n == 1:
             return 0
-        if k % 2 == 0:
-            return (self.kthGrammar(n - 1, k // 2) + 1) % 2
-        return self.kthGrammar(n - 1, (k + 1) // 2)
+        if (k-1) % 2 == 0:
+            return self.kthGrammar(n-1, 1 + k//2)
+        else:
+            return 1 - self.kthGrammar(n-1, k//2)
+
+        # if n == 1:
+        #     return 0
+        # if k % 2 == 0:
+        #     return (self.kthGrammar(n - 1, k // 2) + 1) % 2
+        # return self.kthGrammar(n - 1, (k + 1) // 2)
 
         # brute force (time limit exceed)
         #
