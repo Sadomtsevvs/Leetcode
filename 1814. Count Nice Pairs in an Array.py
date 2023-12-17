@@ -12,7 +12,7 @@ class Solution:
         for num in Counter(nums).values():
             ans += num * (num - 1) // 2
             ans %= MOD
-        return(ans)
+        return ans
 
 
 start_time = time()
