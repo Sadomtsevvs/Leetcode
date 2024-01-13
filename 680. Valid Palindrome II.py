@@ -19,6 +19,20 @@ class Solution:
 
         return validPalindrome2(s)
 
+        # my second solution
+        #
+        # def validPalindrome2(beg, end, deleted):
+        #     if end - beg < 1:
+        #         return True
+        #     if s[beg] == s[end]:
+        #         return validPalindrome2(beg + 1, end - 1, deleted)
+        #     elif deleted:
+        #         return False
+        #     else:
+        #         return validPalindrome2(beg + 1, end, True) or validPalindrome2(beg, end - 1, True)
+        #
+        # return validPalindrome2(0, len(s) - 1, False)
+
 
 start_time = time()
 

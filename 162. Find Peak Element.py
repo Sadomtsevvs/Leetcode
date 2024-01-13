@@ -3,14 +3,29 @@ from time import time
 
 class Solution:
     def findPeakElement(self, nums: list[int]) -> int:
-        l, r = 0, len(nums) - 1
-        while l < r:
-            mid = (l + r) // 2
-            if nums[mid] < nums[mid+1]:
-                l = mid + 1
+
+        # my last solution
+        nums = [-float('inf')] + nums + [-float('inf')]
+        beg, end = 0, len(nums) - 1
+        while True:
+            med = (beg + end) // 2
+            if nums[med-1] < nums[med] > nums[med+1]:
+                return med - 1
+            elif nums[med] < nums[med+1]:
+                beg = med
             else:
-                r = mid
-        return l
+                end = med
+
+        # previous solution 2
+        #
+        # l, r = 0, len(nums) - 1
+        # while l < r:
+        #     mid = (l + r) // 2
+        #     if nums[mid] < nums[mid+1]:
+        #         l = mid + 1
+        #     else:
+        #         r = mid
+        # return l
 
         # previous solution
         #
