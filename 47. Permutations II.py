@@ -24,8 +24,23 @@ class Solution:
         permute([], counter)
         return result
 
+        # brute-force 2
+        #
+        # answer = set()
+        # pool = set(range(len(nums)))
+        #
+        # def permutate(rest, cur):
+        #     if not rest:
+        #         answer.add(tuple(cur))
+        #         return
+        #     for i in rest:
+        #         permutate(rest - {i}, cur + [nums[i]])
+        #
+        # permutate(pool, [])
+        # return [list(el) for el in answer]
 
-
+        # brute-force 1
+        #
         # result = []
         # seen = set()
         #

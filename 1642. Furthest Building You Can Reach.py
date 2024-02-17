@@ -6,6 +6,35 @@ from heapq import *
 class Solution:
     def furthestBuilding(self, heights: list[int], bricks: int, ladders: int) -> int:
 
+        # my last solution
+        #
+        # # idea:
+        # # - if we have enough free bricks to climb: take them
+        # # - if not and we have free ladders: let's find the biggest step with bricks
+        # # -- if this step is bigger than current: change them in one free ladder
+        # # -- if not: let's use this ladder
+        # # - else: break
+        # heap = []
+        # heapify(heap)
+        # free_bricks = bricks
+        # free_ladders = ladders
+        # for i in range(1, len(heights)):
+        #     height = heights[i] - heights[i-1]
+        #     if height <= 0:
+        #         continue
+        #     if height <= free_bricks:
+        #         free_bricks -= height
+        #         heappush(heap, -height)
+        #     elif free_ladders > 0:
+        #         if heap and -heap[0] > height:
+        #             free_bricks -= heappop(heap)
+        #             free_bricks -= height
+        #             heappush(heap, -height)
+        #         free_ladders -= 1
+        #     else:
+        #         return i-1
+        # return len(heights) - 1
+
         # dp, too slow
         #
         # @cache

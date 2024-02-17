@@ -4,17 +4,32 @@ from typing import List
 
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
+
+        # my second solution
+        #
         result = []
-        set_seen = set()
-        set_correct = set(range(1, len(nums) + 1))
+        full = set(range(1, len(nums)+1))
         for num in nums:
-            if num in set_seen:
-                result.append(num)
+            if num in full:
+                full.remove(num)
             else:
-                set_correct.remove(num)
-            set_seen.add(num)
-        result.append(list(set_correct)[0])
+                result.append(num)
+        result.append(full.pop())
         return result
+
+        # my first solution
+        #
+        # result = []
+        # set_seen = set()
+        # set_correct = set(range(1, len(nums) + 1))
+        # for num in nums:
+        #     if num in set_seen:
+        #         result.append(num)
+        #     else:
+        #         set_correct.remove(num)
+        #     set_seen.add(num)
+        # result.append(list(set_correct)[0])
+        # return result
 
         # from LC
         #
