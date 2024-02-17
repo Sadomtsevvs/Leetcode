@@ -8,32 +8,32 @@ class Solution:
 
         # my last solution
         #
-        # # idea:
-        # # - if we have enough free bricks to climb: take them
-        # # - if not and we have free ladders: let's find the biggest step with bricks
-        # # -- if this step is bigger than current: change them in one free ladder
-        # # -- if not: let's use this ladder
-        # # - else: break
-        # heap = []
-        # heapify(heap)
-        # free_bricks = bricks
-        # free_ladders = ladders
-        # for i in range(1, len(heights)):
-        #     height = heights[i] - heights[i-1]
-        #     if height <= 0:
-        #         continue
-        #     if height <= free_bricks:
-        #         free_bricks -= height
-        #         heappush(heap, -height)
-        #     elif free_ladders > 0:
-        #         if heap and -heap[0] > height:
-        #             free_bricks -= heappop(heap)
-        #             free_bricks -= height
-        #             heappush(heap, -height)
-        #         free_ladders -= 1
-        #     else:
-        #         return i-1
-        # return len(heights) - 1
+        # idea:
+        # - if we have enough free bricks to climb: take them
+        # - if not and we have free ladders: let's find the biggest step with bricks
+        # -- if this step is bigger than current: change them in one free ladder
+        # -- if not: let's use this ladder
+        # - else: break
+        heap = []
+        heapify(heap)
+        free_bricks = bricks
+        free_ladders = ladders
+        for i in range(1, len(heights)):
+            height = heights[i] - heights[i-1]
+            if height <= 0:
+                continue
+            if height <= free_bricks:
+                free_bricks -= height
+                heappush(heap, -height)
+            elif free_ladders > 0:
+                if heap and -heap[0] > height:
+                    free_bricks -= heappop(heap)
+                    free_bricks -= height
+                    heappush(heap, -height)
+                free_ladders -= 1
+            else:
+                return i-1
+        return len(heights) - 1
 
         # dp, too slow
         #
@@ -50,18 +50,18 @@ class Solution:
         #
         # return dp(0, bricks, ladders)
 
-        # solution from LC comments, great
-        heap = []
-        heapify(heap)
-        for i in range(len(heights) - 1):
-            difference = heights[i + 1] - heights[i]
-            if difference > 0:
-                heappush(heap, difference)
-            if len(heap) > ladders:
-                bricks -= heappop(heap)
-            if bricks < 0:
-                return i
-        return len(heights) - 1
+        # # solution from LC comments, great
+        # heap = []
+        # heapify(heap)
+        # for i in range(len(heights) - 1):
+        #     difference = heights[i + 1] - heights[i]
+        #     if difference > 0:
+        #         heappush(heap, difference)
+        #     if len(heap) > ladders:
+        #         bricks -= heappop(heap)
+        #     if bricks < 0:
+        #         return i
+        # return len(heights) - 1
 
 
 start_time = time()
